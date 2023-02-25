@@ -42,19 +42,19 @@ public class T08_WindowHandling {
 
     @Test(priority = 1)
     public void HandlingTwoTabs() throws InterruptedException {
-    //1- click on facebook
-    driver.findElement(By.cssSelector("a[href=\"http://www.facebook.com/nopCommerce\"]")).click();
+        //1- click on facebook
+        driver.findElement(By.cssSelector("a[href=\"http://www.facebook.com/nopCommerce\"]")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
-    //2- get window list inside array
+        //2- get window list inside array
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         System.out.println(tabs.size());
 
         //3- switch from tab 0 to tab 1
         driver.switchTo().window(tabs.get(1));
-        System.out.println("tab 1:  " +driver.getCurrentUrl());
+        System.out.println("tab 1:  " + driver.getCurrentUrl());
 
         //4- switch from tab 1 to tab 0
         driver.switchTo().window(tabs.get(0));

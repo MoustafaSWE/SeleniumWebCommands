@@ -64,8 +64,8 @@ public class T04_MouseHover {
 
 
         int min = 0;
-        int max = count-1;   // you are selecting random value from 0 to 2 that's why  max = count-1
-        int selectedUser =  (int)Math.floor(Math.random()*(max-min+1)+min);
+        int max = count - 1;   // you are selecting random value from 0 to 2 that's why  max = count-1
+        int selectedUser = (int) Math.floor(Math.random() * (max - min + 1) + min);
         System.out.println(selectedUser);
         action.moveToElement(avatars.get(selectedUser)).perform();
         Thread.sleep(2000);

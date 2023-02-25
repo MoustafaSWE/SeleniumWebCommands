@@ -22,8 +22,7 @@ public class T01_Static_Dropdown {
     WebDriver driver;
 
     @BeforeMethod
-    public void openBrowser()
-    {
+    public void openBrowser() {
         //1- Define Bridge
         WebDriverManager.chromedriver().setup();
 

@@ -51,7 +51,7 @@ public class T06_Sliders {
 //        driver.findElement(By.cssSelector("button[aria-label=\"Close banner\"]")).click();
 //        Thread.sleep(1000);
 
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
         js.executeScript("arguments[0].click();", driver.findElements(By.cssSelector("div[id=\"sl-topblock\"] label[aria-label*=\"Go to slide\"][class=\"dot\"]")).get(6));
         Thread.sleep(1000);

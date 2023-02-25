@@ -54,7 +54,7 @@ public class T05_WindowHandling {
         System.out.println(driver.getCurrentUrl());
         System.out.println(driver.getTitle());
 
-        Assert.assertEquals(driver.getCurrentUrl(),"http://elementalselenium.com/");
+        Assert.assertEquals(driver.getCurrentUrl(), "http://elementalselenium.com/");
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
@@ -75,13 +75,12 @@ public class T05_WindowHandling {
         driver.switchTo().window(tabs.get(1));
         System.out.println(driver.getCurrentUrl());
         System.out.println(driver.getTitle());
-        Assert.assertEquals(driver.getCurrentUrl(),"http://elementalselenium.com/");
+        Assert.assertEquals(driver.getCurrentUrl(), "http://elementalselenium.com/");
 
 
         driver.findElement(By.cssSelector("a[href=\"https://saucelabs.com/\"]")).click();
 
     }
-
 
 
     @AfterMethod

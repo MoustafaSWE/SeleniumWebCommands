@@ -45,28 +45,28 @@ public class T04_MouseHoverAgin {
     @Test
     public void findelements() throws InterruptedException {
 
-        Actions actions=new Actions(driver);
+        Actions actions = new Actions(driver);
         List<WebElement> mainLinks = driver.findElements(By.xpath("//ul[@class=\"top-menu notmobile\"]/li"));
 //        System.out.println(mainLinks.get(3).getText());
         int count = mainLinks.size();
-        System.out.println("count is "+count);
+        System.out.println("count is " + count);
         int min = 0;
-        int max = count-1;
-        int selectedCategory = (int)Math.floor(Math.random()*(max-min+1)+min);
+        int max = count - 1;
+        int selectedCategory = (int) Math.floor(Math.random() * (max - min + 1) + min);
         actions.moveToElement(mainLinks.get(selectedCategory)).perform();
         String selectedCategoryText = mainLinks.get(selectedCategory).getText();
-        System.out.println("to know which category is selected:   " +selectedCategoryText);
+        System.out.println("to know which category is selected:   " + selectedCategoryText);
         Thread.sleep(2000);
 
-        selectedCategory = selectedCategory+1;
-        String locator = "(//ul[@class='top-menu notmobile']//ul)["+selectedCategory+"]/li";
+        selectedCategory = selectedCategory + 1;
+        String locator = "(//ul[@class='top-menu notmobile']//ul)[" + selectedCategory + "]/li";
         List<WebElement> subCategoryLinks = driver.findElements(By.xpath(locator));
 
         // minimize implicit wait to not waste time if it's empty
-        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         String selectedSubCategoryText;
-        if(!subCategoryLinks.isEmpty()) {
+        if (!subCategoryLinks.isEmpty()) {
             int subCategoryCount = subCategoryLinks.size();
             System.out.println("profile links " + subCategoryCount);
             System.out.println(subCategoryLinks.get(0).getText());
@@ -76,15 +76,13 @@ public class T04_MouseHoverAgin {
             selectedSubCategoryText = subCategoryLinks.get(selectedSubCategory).getText();
             subCategoryLinks.get(selectedSubCategory).click();
             // Do your assertion on selected sub category
-        }
-        else
-        {
+        } else {
             mainLinks.get(selectedCategory).click();
             // Do your assertion on selected main category
         }
 
         // reset it to the initial value
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 

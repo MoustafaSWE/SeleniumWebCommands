@@ -44,15 +44,15 @@ public class T07_ExplicitWait {
 
     @Test(priority = 1)
     public void HandlingTwoTabs() throws InterruptedException {
-    //1- click on wishlist button for this product "HTC One M8 Android L 5.0 Lollipop"
-List<WebElement> wishlistbtns = driver.findElements(By.cssSelector("button[class=\"button-2 add-to-wishlist-button\"]"));
-    //[0, 1, 2, 3]
-     wishlistbtns.get(2).click();
+        //1- click on wishlist button for this product "HTC One M8 Android L 5.0 Lollipop"
+        List<WebElement> wishlistbtns = driver.findElements(By.cssSelector("button[class=\"button-2 add-to-wishlist-button\"]"));
+        //[0, 1, 2, 3]
+        wishlistbtns.get(2).click();
 
-     //2- click on x button
-     driver.findElement(By.cssSelector("span[title=\"Close\"]")).click();
+        //2- click on x button
+        driver.findElement(By.cssSelector("span[title=\"Close\"]")).click();
 
-    //3- wait until green line is disappeared using explicit wait
+        //3- wait until green line is disappeared using explicit wait
         //3.1- Create new object from WebDriverWait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -64,16 +64,16 @@ List<WebElement> wishlistbtns = driver.findElements(By.cssSelector("button[class
         wait.until(ExpectedConditions.elementToBeClickable(wishlist));
 
 
-     //4- go to wishlist page
-     driver.findElement(By.cssSelector("span[class=\"wishlist-label\"]")).click();
+        //4- go to wishlist page
+        driver.findElement(By.cssSelector("span[class=\"wishlist-label\"]")).click();
 
 
-     // 5- get qty value and assert it's larger than zero
-    String count =   driver.findElement(By.className("qty-input")).getAttribute("value");
+        // 5- get qty value and assert it's larger than zero
+        String count = driver.findElement(By.className("qty-input")).getAttribute("value");
 
-    int countint=    Integer.parseInt(count);
+        int countint = Integer.parseInt(count);
 
-        Assert.assertTrue(countint>0);
+        Assert.assertTrue(countint > 0);
     }
 
     @AfterMethod
