@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 public class T03_findelements {
 
+//    Don't apply Thread.sleep -> it is for you to see the execution ; remove it once you learn the script's purpose
+
+
     WebDriver driver;
 
     @BeforeMethod
