@@ -1,5 +1,3 @@
-package java;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,18 +9,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class T09_WindowHandling {
 
 //    Don't apply Thread.sleep -> it is for you to see the execution ; remove it once you learn the script's purpose
 
-    WebDriver driver;
+    WebDriver driver = null;
 
     @Test(priority = 1)
-    public void HandlingTwoTabs() throws InterruptedException {
-        //1- click on facebook
+    public void handlingTwoTabs() throws InterruptedException {
+        //1- click on twitter
+        driver.findElement(By.cssSelector("a[href='https://twitter.com/nopCommerce']")).click();
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         //2- get window list inside array
 
@@ -68,5 +68,7 @@ public class T09_WindowHandling {
     public void quitDriver() throws InterruptedException {
         Thread.sleep(3000);
         driver.quit();
+
+        // driver.quit  !=  driver.close
     }
 }

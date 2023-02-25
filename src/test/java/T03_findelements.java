@@ -1,11 +1,9 @@
-package java;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,9 +11,10 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class T08_MouseHover {
+public class T03_findelements {
 
 //    Don't apply Thread.sleep -> it is for you to see the execution ; remove it once you learn the script's purpose
+
 
     WebDriver driver;
 
@@ -35,23 +34,32 @@ public class T08_MouseHover {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 
-        // 4- Navigate to website
-        driver.get("https://the-internet.herokuapp.com/hovers");
+        // 4- Navigate to website   url should be english  >> ?hl=en
+        driver.get("https://www.google.com/?hl=en");
+
     }
 
 
-    @Test(priority = 1)
-    public void HandlingTwoTabs() throws InterruptedException {
+    @Test
+    public void findelements() throws InterruptedException {
 
-        // 1- Create object from Actions class (in Selenium)
-        Actions action = new Actions(driver);
+        //1- search on "selenium"
+        driver.findElement(By.name("q")).sendKeys("selenium");
 
-        WebElement image = driver.findElement(By.cssSelector("img[src=\"/img/avatar-blank.jpg\"]"));
-        action.moveToElement(image).perform();
+        driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
 
-        Thread.sleep(4000);
+        //2- loop on all results and make sure that they are all contains the word "selenium"
+        int size = driver.findElements(By.cssSelector("div[class=\"g Ww4FFb tF2Cxc\"] h3[class=\"LC20lb MBeuO DKV0Md\"]")).size();
+        System.out.println(size);
+        for (int i = 0; i < size; i++) {
+            String text = driver.findElements(By.cssSelector("div[class=\"g Ww4FFb tF2Cxc\"] h3[class=\"LC20lb MBeuO DKV0Md\"]")).get(i).getText();
+            System.out.println(i);
+            System.out.println(text);
 
-        driver.findElement(By.cssSelector("a[href=\"/users/1\"]")).click();
+
+            Assert.assertTrue(text.toLowerCase().contains("selenium"));
+        }
+
 
     }
 
@@ -60,5 +68,6 @@ public class T08_MouseHover {
         Thread.sleep(3000);
         driver.quit();
     }
+
 
 }

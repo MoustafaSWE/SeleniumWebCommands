@@ -1,24 +1,19 @@
-package java;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class T02_Dynamic_Dropdown {
+public class T08_MouseHover {
 
-//    Static dropdown list:	dropdowns having tagName "Select"
-//    Dynamic dropdown list:	dropdowns having different tagName other than "Select"
 //    Don't apply Thread.sleep -> it is for you to see the execution ; remove it once you learn the script's purpose
-
 
     WebDriver driver;
 
@@ -39,22 +34,22 @@ public class T02_Dynamic_Dropdown {
 
 
         // 4- Navigate to website
-        driver.get("https://www.google.com/");
-
+        driver.get("https://the-internet.herokuapp.com/hovers");
     }
 
 
-    @Test
-    public void dynamicDropdown() throws InterruptedException {
+    @Test(priority = 1)
+    public void HandlingTwoTabs() throws InterruptedException {
 
-        //1- search on "selenium"
-        driver.findElement(By.name("q")).sendKeys("selenium");
+        // 1- Create object from Actions class (in Selenium)
+        Actions action = new Actions(driver);
 
-        // 2- dynamic dropdown list
-        // We couldn't use Select class with dynamic lists, instead we could handle it with findelements() method
-        Thread.sleep(7000);
-        List<WebElement> list = driver.findElements(By.cssSelector("li[class=\"sbct\"]"));  // 11 weblements
-        list.get(6).click();
+        WebElement image = driver.findElement(By.cssSelector("img[src=\"/img/avatar-blank.jpg\"]"));
+        action.moveToElement(image).perform();
+
+        Thread.sleep(4000);
+
+        driver.findElement(By.cssSelector("a[href=\"/users/1\"]")).click();
 
     }
 
@@ -63,6 +58,5 @@ public class T02_Dynamic_Dropdown {
         Thread.sleep(3000);
         driver.quit();
     }
-
 
 }
